@@ -1,0 +1,80 @@
+{
+  "name": "Answer",
+  "type": "object",
+  "properties": {
+    "question_id": {
+      "type": "string",
+      "description": "ID of the question being answered"
+    },
+    "content": {
+      "type": "string",
+      "description": "Answer content"
+    },
+    "author_name": {
+      "type": "string",
+      "description": "Author display name"
+    },
+    "upvotes": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of upvotes"
+    },
+    "upvoted_by": {
+      "type": "array",
+      "description": "User IDs who upvoted",
+      "items": {
+        "type": "string"
+      }
+    },
+    "is_accepted": {
+      "type": "boolean",
+      "default": false,
+      "description": "Marked as helpful/accepted answer"
+    },
+    "code_snippet": {
+      "type": "string",
+      "description": "Optional code snippet"
+    }
+  },
+  "required": [
+    "question_id",
+    "content"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": {
+          "$in": [
+            "user",
+            "admin"
+          ]
+        }
+      }
+    },
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
