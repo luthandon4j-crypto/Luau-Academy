@@ -1,0 +1,78 @@
+{
+  "name": "Lesson",
+  "type": "object",
+  "properties": {
+    "order": {
+      "type": "number",
+      "description": "Lesson order/number"
+    },
+    "title": {
+      "type": "string",
+      "description": "Lesson title"
+    },
+    "slug": {
+      "type": "string",
+      "description": "URL-friendly slug"
+    },
+    "description": {
+      "type": "string",
+      "description": "Short description"
+    },
+    "content": {
+      "type": "string",
+      "description": "Full lesson content in markdown"
+    },
+    "code_examples": {
+      "type": "array",
+      "description": "Code examples for the lesson",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "explanation": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "has_quiz": {
+      "type": "boolean",
+      "description": "Whether this lesson has a quiz"
+    },
+    "quiz_questions": {
+      "type": "array",
+      "description": "Quiz questions if has_quiz is true",
+      "items": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "correct_index": {
+            "type": "number"
+          },
+          "explanation": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "order",
+    "title",
+    "slug",
+    "content"
+  ]
+}
